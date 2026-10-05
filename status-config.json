@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "abrxsvavstatus.config.v1",
+  "repository": "LordJeferies/abrxs-vav",
+  "statusRepository": "LordJeferies/abrxsvavstatus",
+  "stableBranch": "main",
+  "developmentBranch": "dev/vav-complete",
+  "projectStatusPath": "docs/PROJECT_STATUS.json"
+}
