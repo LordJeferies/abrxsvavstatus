@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Flujos de trabajo y tutoriales — AbrxsVAV</title>
+<meta name="description" content="Ejemplos de flujos completos y tutoriales: podcast a 20 verticales, intro estilo EP55, X-rolls, motions, SFX, carruseles, handoff de prompts y modo faceless.">
+<meta name="theme-color" content="#0d0f12">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+  <a class="brand" href="index.html">Abrxs<b>VAV</b></a>
+  <div class="nav-links">
+    <a href="index.html">Inicio</a><a href="tools.html">Herramientas</a>
+    <a href="workflows.html">Flujos & Tutoriales</a><a href="support.html">Soporte</a>
+    <a href="status.html">Estado</a>
+  </div>
+  <a class="gh-link" href="https://github.com/LordJeferies/abrxs-vav" target="_blank" rel="noopener">★ GitHub</a>
+</div></nav>
+
+<main class="wrap">
+<section>
+  <span class="k">Flujos de trabajo</span>
+  <h1 style="font-size:clamp(28px,4vw,42px)">Cómo se produce contenido<br>de verdad, paso a paso</h1>
+  <p class="lead">Estos son los flujos reales para los que está diseñada la app, basados en el pipeline
+  existente (podcasts EP, intros estilo EP55, carruseles/Lienzos y feed multi-marca). Cada tutorial
+  indica estación, entradas y salidas.</p>
+</section>
+
+<!-- FLUJO 1 -->
+<section id="f-batch"><div class="card">
+  <span class="tag acc">FLUJO PRINCIPAL</span><h2 style="margin-top:8px">Podcast de 2 horas → 20 clips verticales vestidos</h2>
+  <div class="step"><div class="step-n">1</div><div><b>Ingest en Canter</b><p class="sub">Arrastra el máster. Si ya tienes transcript (Abrxs_transcriber_v1), no se repite Whisper. La app lo alinea palabra a palabra con el video.</p></div></div>
+  <div class="step"><div class="step-n">2</div><div><b>Selección editorial</b><p class="sub">Marca en el transcript los tramos que valen (la app sugiere momentos). Cada ficha = una pieza con su source map en frames. Confirma apertura y cierre alineados al texto.</p></div></div>
+  <div class="step"><div class="step-n">3</div><div><b>Plan visual con Visual Director</b><p class="sub">Cambias a Dresser y activas el preset "Vertical Podcast" (densidad 3–6 b-rolls/min, X-roll solo si aporta: máx 4 por vertical). Aparecen los ghost events punteados con su propósito.</p></div></div>
+  <div class="step"><div class="step-n">4</div><div><b>Aprobar (o auto-aprobar)</b><p class="sub">Revisas los ghost events en el timeline — o auto-apruebas el lote. Los X-rolls se generan con el Composer determinista: 1 máster IA + movimientos de cámara exactos, editables sin volver a llamar a la IA.</p></div></div>
+  <div class="step"><div class="step-n">5</div><div><b>Materialización en lote</b><p class="sub">La app resuelve cada asset: biblioteca del cliente → stock (Pexels/Pixabay) → IA → handoff manual. Ken Burns con zoom máx 1.18, captions estilo Amanda, SFX de la librería canónica. 20 renders en cola con progreso real.</p></div></div>
+  <div class="step"><div class="step-n">6</div><div><b>Review y entrega</b><p class="sub">QA automático pre-revisión (safe areas, sincronía, huecos). Apruebas desde el iPhone si quieres. Delivery: MP4 9:16 con captions quemadas + SRT, y reporte de licencias por si un cliente lo pide.</p></div></div>
+</div></section>
+
+<!-- FLUJO 2 -->
+<section id="f-intro"><div class="card">
+  <span class="tag acc">FLUJO</span><h2 style="margin-top:8px">Intro estilo EP55 (la barra de calidad)</h2>
+  <p class="sub">La intro de referencia controla las 5 capas: editorial, visual, motion, audio y ritmo.
+  La app la trata como un proyecto con gramática propia.</p>
+  <div class="step"><div class="step-n">1</div><div><b>Plan</b><p class="sub">Pegas el guion de la intro; Plan lo convierte en beats y asigna propósito a cada uno. La gramática de intro exige exactamente 6 X-rolls (densidad canónica XR_INTRO: 6).</p></div></div>
+  <div class="step"><div class="step-n">2</div><div><b>Dresser con packs</b><p class="sub">Cada X-roll toma una familia del canon (COMIC_INFO para datos en zonas, TYPO para titulares, PHOTO_OBJECT para la metáfora visual). El sistema visual queda bloqueado: paleta, fuentes y textura del cliente; solo varían los elementos.</p></div></div>
+  <div class="step"><div class="step-n">3</div><div><b>Motion con intención</b><p class="sub">Los presets (ZOOM_IN, ZOOM_OUT_PAN, SLOW_DRIFT…) se asignan por beat del speech — cambio visual donde cambia la idea, no por cadencia fija. SFX solo motivado (SFX_WHOOSH al slide, SFX_IMPACT al dato).</p></div></div>
+  <div class="step"><div class="step-n">4</div><div><b>QA y entrega</b><p class="sub">Self-eval compara contra la barra: sin zoom 110% flaco, SFX con ducking, captions en safe area. Delivery a MP4 16:9 o kit DaVinci con reference render.</p></div></div>
+</div></section>
+
+<!-- FLUJO 3 -->
+<section id="f-lienzo"><div class="card">
+  <span class="tag acc">FLUJO</span><h2 style="margin-top:8px">Carrusel / post / Lienzo para feed</h2>
+  <div class="step"><div class="step-n">1</div><div><b>Plan como secuencia de tarjetas</b><p class="sub">Un carrusel se planifica como frames-tarjeta: hook, desarrollo, cierre, CTA — con el perfil de marca del cliente (paleta, fuentes, logo).</p></div></div>
+  <div class="step"><div class="step-n">2</div><div><b>Dresser visual</b><p class="sub">Cada tarjeta recibe fondo/imagen (biblioteca del cliente o stock), tipografía del pack y micro-motion si se exporta como Lienzo animado.</p></div></div>
+  <div class="step"><div class="step-n">3</div><div><b>Delivery dual</b><p class="sub">Export como PNG grid para Instagram/LinkedIn, o como <b>Lienzo-HTML</b> con manifest compatible con tu catálogo Abrxs_pages (versionado, con historial y URL pública) — listo para enlazar desde el feed.</p></div></div>
+</div></section>
+
+<!-- TUTORIALES -->
+<section id="tutoriales">
+  <span class="k">Tutoriales por caso de uso</span>
+  <h2>Las recetas, una por una</h2>
+  <p class="sub">Cada tutorial es el flujo mínimo para ese resultado. Los marcados 🚧 dependen de pasos
+  aún en construcción (ver <a href="status.html">Estado</a>).</p>
+
+  <details open><summary>📦 T1 · Vestir un solo clip (B-roll simple)</summary><div class="body">
+    <b>Estación:</b> Dresser. <b>Entra:</b> 1 clip cortado. <b>Sale:</b> MP4 vestido.
+    <p>1. Abre la pieza en Dresser → el Visual Director propone 2–4 ghost events según duración.
+    2. Aprueba el que quieras; en su inspector lee el propósito y el anchor textual.
+    3. Elige la fuente en el Asset Finder: escribe "ciudad de noche con lluvia vertical" o deja que la
+    app la redacte desde el transcript → grilla de Pexels/Pixabay/tu biblioteca → clic.
+    4. Ajusta el motion (por defecto ZOOM_IN 1.0→1.12) y la duración exacta arrastrando en el timeline.
+    5. Render (FFmpeg) → listo en Activity. Caché: si re-renderizas, solo re-compone el movimiento.</p>
+  </div></details>
+
+  <details><summary>🧩 T2 · Crear un X-roll COMIC_INFO (panel de datos)</summary><div class="body" id="xrolls">
+    <b>Estación:</b> Dresser → XR Studio. <b>Entra:</b> pieza + datos a mostrar. <b>Sale:</b> X-roll final.
+    <p>1. Selecciona el rango del transcript donde vive el dato y crea un evento X-roll, familia COMIC_INFO.
+    2. La app genera 1 máster (las fuentes contradictorias + checklist central) por IA — con las negative
+    rules del cliente activas.
+    3. Define los 5 estados de cámara: S01 lower-left → S02 lower-right → S03 upper-left → S04
+    upper-right → S05 full (vineta canónica). Cada estado = un movimiento exacto de la librería
+    (PAN_RIGHT, PAN_UP, ZOOM_OUT…) con su duración en frames.
+    4. Preview en vivo → render FFmpeg determinista. Editar un timing después <b>no</b> vuelve a llamar
+    a ninguna IA: solo re-renderiza. Variantes: pide 3 ejecuciones visuales distintas con la misma
+    función y aprueba una.</p>
+  </div></details>
+
+  <details><summary>✍️ T3 · TYPO determinista (titular animado)</summary><div class="body">
+    <b>Estación:</b> Dresser → XR Studio, familia TYPO. <b>Sale:</b> titular animado sin IA.
+    <p>1. Crea el evento TYPO: escribe el titular, elige el pack (vox-paper, glass-ui) y el tamaño.
+    2. La tipografía usa las fuentes del Client Profile — cero generación, cero coste, infinitamente
+    editable. 3. Elige entrada/salida de la librería de motion y renderiza. Regla del canon: TYPO jamás
+    se delega a IA.</p>
+  </div></details>
+
+  <details><summary>🤲 T4 · Handoff: generar en Kling/Veo/ChatGPT y volver</summary><div class="body" id="t-handoff">
+    <b>Estación:</b> Dresser/Visual Lab. <b>Sale:</b> tu asset generado fuera, adjuntado automáticamente.
+    <p>1. En el evento, "Exportar para IA externa" → copia el prompt (o descarga el .txt, o exporta la
+    carpeta batch completa del proyecto: HANDOFF_PROYECTO/C07/BR03_….txt + _LEEME.txt).
+    2. Genera en la IA que uses (Kling, Veo, Runway, Freepik, ChatGPT…) usando el prompt y el frame de
+    referencia incluidos.
+    3. Guarda el resultado con el nombre esperado (BR03_tokyo-night.mp4) y arrástralo a la app: el
+    Import Result lo matchea y lo adjunta al evento correcto, marcado origen "manual". Nada se
+    reconfigura.</p>
+  </div></details>
+
+  <details><summary>⚡ T5 · Lote de 20 verticales de un podcast</summary><div class="body" id="t-batch">
+    <b>Estaciones:</b> Canter → Dresser → Delivery. <b>Ver flujo completo arriba (F1).</b>
+    <p>Claves del lote: auto-approve opcional por preset · jobs aislados (el fallo del video 13 no
+    detiene los otros 19) · caché por prompt+modelo+seed · HITL checkpoint opcional que pausa el lote
+    y espera tu decisión desde el teléfono · captions con política flexible si los clips ya traen
+    subtítulos quemados (inserts-only).</p>
+  </div></details>
+
+  <details><summary>🤖 T6 · Modo Faceless (guion → video completo)</summary><div class="body" id="t-faceless">
+    <b>Estación:</b> Workflows → receta "Faceless". <b>Entra:</b> un guion. <b>Sale:</b> video completo.
+    <p>La receta encadena: beats del guion → asset sheet (qué visual necesita cada beat) → voz TTS
+    (Edge gratis o provider) → materiales (stock/IA) → subtítulos → montaje → MP4. Todo produce un
+    proyecto con Production Graph: cada paso es editable después, no un video opaco. Funciona igual de
+    barato (Edge TTS + Pexels + Whisper local) o con generación IA si el presupuesto lo permite.</p>
+  </div></details>
+
+  <details><summary>🎚️ T7 · Motions y SFX canónicos</summary><div class="body" id="motions">
+    <b>Dónde:</b> inspector de cualquier evento visual.
+    <p><b>Motions disponibles</b> (zoom máx 1.18, ease-in-out): STATIC · ZOOM_IN · ZOOM_OUT ·
+    PAN_LEFT/RIGHT/UP/DOWN · ZOOM_IN_PAN · ZOOM_OUT_PAN · SLOW_DRIFT. Asígnalos por beat del speech,
+    no por cadencia fija.
+    <b>SFX disponibles</b> (librería cerrada, la repetición es preferible a inventar sonidos):
+    SFX_CLICK (soft/medium/deep) · SFX_KEYBOARD · SFX_WHOOSH · SFX_CAMERA · SFX_GOOD · SFX_WRONG ·
+    SFX_LOW_BOOM · SFX_EMPHASIS · SFX_SUSPENSE · SFX_TENSION · SFX_RISER · SFX_IMPACT. Cada evento
+    exige trigger y propósito — el QA te avisa si hay SFX sin motivo.</p>
+  </div></details>
+
+  <details><summary>🧪 T8 · Upscale / restaurar un asset</summary><div class="body">
+    <b>Estación:</b> Visual Lab → Enhance.
+    <p>1. Selecciona el asset → Enhance → elige el proveedor (ComfyUI local gratis o API). 2. La app
+    muestra coste estimado antes de lanzar; confirma. 3. El resultado entra a la biblioteca con
+    provenance (modelo, seed, hash) y queda vinculado al original. Un proveedor caído activa el circuit
+    breaker — el Doctor te lo explica.</p>
+  </div></details>
+
+  <details><summary>🤝 T9 · Revisión de cliente desde el iPhone</summary><div class="body">
+    <b>Estación:</b> Review + Companion.
+    <p>1. En Review, "Compartir con cliente" → la pieza aparece en el companion PWA (solo lo que abras).
+    2. Tu cliente ve el video, deja notas ancladas al rango exacto y aprueba o pide cambios.
+    3. Las notas llegan al grafo de tu desktop (por Supabase cuando la app está abierta, o en cola
+    offline). 4. "Cambios solicitados" regresa la pieza a Dresser con las notas como ghost events de
+    corrección.</p>
+  </div></details>
+
+  <details><summary>🕹️ T10 · Operar la app con un agente (MCP)</summary><div class="body">
+    <b>Requisito:</b> la app corriendo + el servidor MCP local (mcp/server.mjs del repo).
+    <p>Configura el servidor en tu cliente MCP (Claude/Codex/ChatGPT) y podrás: crear proyectos,
+    lanzar transcripciones, listar piezas, aprobar eventos, consultar el Doctor o lanzar renders — con
+    las mismas reglas de seguridad: acciones destructivas exigen confirm:true y nada gasta créditos
+    sin tu confirmación. Herramientas tipadas vav_* documentadas en docs/MCP_INTEGRATION.md.</p>
+  </div></details>
+</section>
+
+<section>
+  <div class="card" style="display:flex;gap:24px;align-items:center;flex-wrap:wrap">
+    <div style="flex:1;min-width:260px"><b>¿Dudas de qué estación usar o por qué un error?</b>
+    <p class="sub" style="margin:8px 0 0">Soporte, errores comunes y preguntas frecuentes.</p></div>
+    <a class="btn primary" href="support.html">Ir a soporte →</a>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">
+  <span>AbrxsVAV · familia <b>Abraxas</b></span>
+  <span><a href="https://github.com/LordJeferies/abrxs-vav">Repo</a> · <a href="status.html">Estado</a></span>
+</div></footer>
+<script src="assets/app.js"></script>
+</body>
+</html>

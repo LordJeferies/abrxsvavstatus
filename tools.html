@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Herramientas — AbrxsVAV</title>
+<meta name="description" content="Las 11 estaciones de AbrxsVAV: qué hace cada una, cómo lo hace, con qué y qué NO hace.">
+<meta name="theme-color" content="#0d0f12">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+  <a class="brand" href="index.html">Abrxs<b>VAV</b></a>
+  <div class="nav-links">
+    <a href="index.html">Inicio</a><a href="tools.html">Herramientas</a>
+    <a href="workflows.html">Flujos & Tutoriales</a><a href="support.html">Soporte</a>
+    <a href="status.html">Estado</a>
+  </div>
+  <a class="gh-link" href="https://github.com/LordJeferies/abrxs-vav" target="_blank" rel="noopener">★ GitHub</a>
+</div></nav>
+
+<main class="wrap">
+<section>
+  <span class="k">Las 11 estaciones</span>
+  <h1 style="font-size:clamp(28px,4vw,42px)">Qué hace cada herramienta,<br>cómo lo hace y con qué</h1>
+  <p class="lead">Todas las estaciones escriben sobre el mismo Production Graph. Ninguna importa
+  el código de otra: si una crashea, el resto sigue. Cada una lista también sus límites — el
+  diseño es tan importante por lo que NO hace como por lo que hace.</p>
+</section>
+
+<section id="hub"><div class="card">
+  <span class="tag acc">ESTACIÓN</span><h2 style="margin-top:8px">🏠 Hub</h2>
+  <p class="sub"><b>Qué hace:</b> lista de proyectos con su estado por estación (BRIEF ✓ · CORTES 20 ·
+  PLAN VISUAL 12/20 · REVIEW pendiente) y botón "continuar donde ibas".</p>
+  <p class="sub"><b>Cómo:</b> lee el Production Graph y calcula el estado en vivo. <b>Con qué:</b>
+  persistencia local atómica con backups automáticos. <b>Qué no hace:</b> no edita contenido.</p>
+</div></section>
+
+<section id="plan"><div class="card">
+  <span class="tag acc">ESTACIÓN</span><h2 style="margin-top:8px">📝 Plan</h2>
+  <p class="sub"><b>Qué hace:</b> entras con un guion.txt y sales con beats, estructura de contenido y
+  preproducción visual (b-rolls potenciales, ideas de X-rolls, SFX) — sin que exista video todavía.</p>
+  <p class="sub"><b>Cómo:</b> parse determinista del texto primero; el LLM solo sugiere, con prompts
+  versionados. Todo queda como nodos "proposed" del grafo esperando el máster.
+  <b>Qué no hace:</b> no genera video ni audio; no obliga a usar IA.</p>
+</div></section>
+
+<section id="canter"><div class="card">
+  <span class="tag acc">ESTACIÓN</span><h2 style="margin-top:8px">✂️ Canter — decide QUÉ queda</h2>
+  <p class="sub"><b>Qué hace:</b> ingest del máster, transcripción word-level (Whisper local), alineación
+  texto↔video, selección editorial sobre el transcript, cortes con <b>confirmación manual de límites</b>,
+  multicortes, orden narrativo y exportación limpia por recetas.</p>
+  <p class="sub"><b>Cómo:</b> el motor Canter 3.8.1 entra por adapter (no se reescribe); el podcast jamás
+  se carga entero en memoria — streaming por rangos; cola de trabajos serial con prioridad y cancelación.
+  <b>Qué no hace:</b> no decide cómo se ve nada (eso es Dresser).</p>
+</div></section>
+
+<section id="dresser"><div class="card">
+  <span class="tag acc">ESTACIÓN · LA MÁS NUEVA</span><h2 style="margin-top:8px">🎨 Dresser — decide CÓMO SE VE</h2>
+  <p class="sub"><b>7 herramientas internas:</b></p>
+  <table>
+    <tr><th>Herramienta</th><th>Qué hace</th></tr>
+    <tr><td>Visual Director</td><td>Analiza transcript + escenas + perfil del cliente y propone <b>ghost events</b> punteados en el timeline (b-roll, X-roll, caption) con su propósito editorial. Botón "explica esta decisión" en cada uno.</td></tr>
+    <tr><td>Visual Plan Settings</td><td>Densidad de B-roll (3–6/min de referencia), tipos, fuentes por prioridad (cliente → stock → IA), familias XR activadas, captions, estilo de edición.</td></tr>
+    <tr><td>Asset Finder</td><td>Una consulta → Pexels + Pixabay + tu biblioteca en paralelo → grilla con previews y filtros de licencia → un clic adjunta.</td></tr>
+    <tr><td>Caption Engine</td><td>Layouts y estilos por cliente, karaoke word-level, safe areas, políticas para videos con captions quemados (inserts-only), render quemado o SRT/ASS.</td></tr>
+    <tr><td>XR Studio</td><td>Elige un pack visual (vox-paper, glass-ui…), llena parámetros, preview en vivo, render. Template + brand tokens — nunca inventado a ciegas.</td></tr>
+    <tr><td>Timeline + QA</td><td>Las capas visuales viven sobre el source map; antes de revisar, un self-eval detecta texto fuera de safe area, captions desincronizadas y huecos.</td></tr>
+    <tr><td>Handoff</td><td>Exporta prompts organizados para generar fuera (Kling, Veo, ChatGPT…) y reimporta el resultado automáticamente por nombre de archivo.</td></tr>
+  </table>
+  <p class="sub" style="margin-top:12px"><b>Qué no hace:</b> no es DaVinci (sin grading, multicam ni mezcla),
+  no reinventa la narrativa, y no depende de IA para todo — la tipografía determinista y los SRT no
+  necesitan un modelo.</p>
+</div></section>
+
+<section id="visual-lab"><div class="card">
+  <span class="tag acc">ESTACIÓN</span><h2 style="margin-top:8px">🧪 Visual Lab</h2>
+  <p class="sub"><b>Qué hace:</b> el taller de assets. Búsqueda paralela en stock, Generation Space
+  (prompt → proveedor → job → asset con progreso real), comparación A/B de variantes, upscale y
+  restauración vía proveedores intercambiables, storyboard e historial.</p>
+  <p class="sub"><b>Cómo:</b> todo por contratos de capability (stock.search, image.generate…): ComfyUI
+  local, NVIDIA NIM (imágenes), APIs — y siempre el modo manual handoff como alternativa sin coste.
+  Strict free mode: nunca cae a un proveedor pagado sin avisar. <b>Qué no hace:</b> no decide dónde se
+  usa el asset (eso es Dresser).</p>
+</div></section>
+
+<section id="workflows"><div class="card">
+  <span class="tag acc">ESTACIÓN</span><h2 style="margin-top:8px">🕸️ Workflow Studio</h2>
+  <p class="sub"><b>Qué hace:</b> editor visual de nodos para construir recetas como "Vertical Podcast"
+  (procesa 20 clips con un clic). Catálogo: entrada, análisis, IA, medios, lógica (Array, Router, Switch,
+  Retry, <b>Human Approval</b>) y salida. Una receta publicada puede exponerse como API/MCP.</p>
+  <p class="sub"><b>Cómo:</b> orquesta el Job Engine con dependencias; el grafo sigue siendo la única
+  verdad. <b>Qué no hace:</b> no es n8n — nada de correos ni CRMs. El usuario cotidiano nunca lo abre:
+  la receta ya existe.</p>
+</div></section>
+
+<section id="review"><div class="card">
+  <span class="tag acc">ESTACIÓN</span><h2 style="margin-top:8px">👁️ Review</h2>
+  <p class="sub"><b>Qué hace:</b> notas ancladas al objeto exacto (un corte, un b-roll, un rango),
+  comparación de versiones, aprobación o "cambios solicitados" con regeneración. El status fluye:
+  review → changes_requested → approved.</p>
+  <p class="sub"><b>Cómo:</b> dentro de la app y con el <b>Review Companion</b> (PWA para iPhone de tus
+  clientes), ambos sobre los mismos contratos, sincronizados por Supabase. <b>Qué no hace:</b> no
+  reescribe Review 05 — lo integra por adapter.</p>
+</div></section>
+
+<section id="delivery"><div class="card">
+  <span class="tag acc">ESTACIÓN</span><h2 style="margin-top:8px">📦 Delivery — salida dual</h2>
+  <p class="sub"><b>Camino A — Render propio:</b> MP4 vestido o limpio (9:16 / 16:9 / 1:1) con los assets ya adjuntos.</p>
+  <p class="sub"><b>Camino B — Kit de edición:</b> carpeta organizada + FCPXML/EDL DaVinci + draft CapCut +
+  SRT/ASS + EDIT_PLAN.txt (legible por humano o agente MCP de DaVinci) + <b>reference render</b> (proxy
+  que muestra cómo debe quedar). También exporta <b>Lienzo-HTML</b> para carruseles/páginas públicas.</p>
+  <p class="sub"><b>Siempre:</b> reporte de provenance con la licencia de cada asset usado; exports
+  versionados (FINAL_v3, jamás sobrescribir). <b>Qué no hace:</b> no publica en redes (eso queda en
+  publisher/n8n externo).</p>
+</div></section>
+
+<section id="clients"><div class="card">
+  <span class="tag acc">ESTACIÓN</span><h2 style="margin-top:8px">👥 Clients</h2>
+  <p class="sub"><b>Qué hace:</b> la identidad global: colores, fuentes, logos, glosario (Canter corrige
+  transcripciones con él), reglas de captions/b-roll/X-roll y negative rules ("no inventar imagen
+  identificable del padre"), más el estilo de edición (EditGrammar).</p>
+  <p class="sub"><b>Cómo:</b> incluso un TXT desordenado funciona: parse → IA completa → diff visual →
+  apruebas. <b>Qué no hace:</b> no guarda secretos (eso es el Keychain del sistema).</p>
+</div></section>
+
+<section id="library"><div class="card">
+  <span class="tag acc">ESTACIÓN</span><h2 style="margin-top:8px">📚 Library</h2>
+  <p class="sub"><b>Qué hace:</b> assets con provenance, licencia y caché por hash; packs instalables
+  (X-rolls, motion, títulos, datos); bins/folders/tags/ratings. Tres niveles: cliente / proyecto / global.</p>
+  <p class="sub"><b>Con qué:</b> virtualización real — 500+ assets sin lag.</p>
+</div></section>
+
+<section id="activity"><div class="card">
+  <span class="tag acc">ESTACIÓN</span><h2 style="margin-top:8px">⚡ Activity</h2>
+  <p class="sub"><b>Qué hace:</b> la cola de trabajos global con progreso real, cancelar, reintentar y
+  prioridades; recuperación post-crash (un job interrumpido se reanuda o reinicia); y el <b>Doctor</b>:
+  FFmpeg, GPU, disco, latencia de proveedores, estado de la DB y keys vencidas — con semáforos.</p>
+  <p class="sub"><b>Cómo:</b> circuit breaker por proveedor (3 fallos → deshabilitado 10 min, explicado)
+  y logs estructurados con visor integrado.</p>
+</div></section>
+
+<section>
+  <div class="card" style="display:flex;gap:24px;align-items:center;flex-wrap:wrap">
+    <div style="flex:1;min-width:260px"><b>¿Cómo se combinan en la práctica?</b>
+    <p class="sub" style="margin:8px 0 0">Mira los flujos de trabajo completos y tutoriales paso a paso.</p></div>
+    <a class="btn primary" href="workflows.html">Flujos y tutoriales →</a>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">
+  <span>AbrxsVAV · familia <b>Abraxas</b></span>
+  <span><a href="https://github.com/LordJeferies/abrxs-vav">Repo</a> · <a href="status.html">Estado</a></span>
+</div></footer>
+<script src="assets/app.js"></script>
+</body>
+</html>

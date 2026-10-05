@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Soporte — AbrxsVAV</title>
+<meta name="description" content="Preguntas frecuentes, solución de errores comunes y dudas sobre AbrxsVAV.">
+<meta name="theme-color" content="#0d0f12">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+  <a class="brand" href="index.html">Abrxs<b>VAV</b></a>
+  <div class="nav-links">
+    <a href="index.html">Inicio</a><a href="tools.html">Herramientas</a>
+    <a href="workflows.html">Flujos & Tutoriales</a><a href="support.html">Soporte</a>
+    <a href="status.html">Estado</a>
+  </div>
+  <a class="gh-link" href="https://github.com/LordJeferies/abrxs-vav" target="_blank" rel="noopener">★ GitHub</a>
+</div></nav>
+
+<main class="wrap">
+<section>
+  <span class="k">Soporte</span>
+  <h1 style="font-size:clamp(28px,4vw,42px)">Errores comunes, FAQ y dudas</h1>
+  <p class="lead">Si no encuentras tu respuesta aquí, el asistente (esquina inferior derecha) responde
+  en local con toda la información del proyecto — sin enviar nada a ningún servidor.</p>
+</section>
+
+<section id="errores">
+  <span class="k">Despeje de errores</span>
+  <h2>Problemas comunes y su solución</h2>
+  <details open><summary>⚡ La app no abre / pantalla en blanco</summary><div class="body">
+    <p><b>Causa más común:</b> Node desactualizado. La app exige Node 22+. Verifica con <code>node --version</code>.
+    <b>Solución:</b> <code>brew install node@24</code> (macOS) → vuelve a correr <code>npm ci && npm run dev</code>.
+    Si persiste, abre DevTools (⌘⌥I) y usa "Copiar diagnóstico" en la pantalla de error del módulo —
+    cada estación falla aislada: el resto de la app sigue funcionando.</p></div></details>
+  <details><summary>💥 Un módulo crasheó (ej. Canter)</summary><div class="body">
+    <p>Por diseño el error queda aislado: tu proyecto y los demás módulos están intactos. Pulsa
+    "Reintentar" en la pantalla de error o navega a otra estación y vuelve. Si reproduce, "Copiar
+    diagnóstico" y reporta el issue en GitHub con ese texto (no contiene datos sensibles).</p></div></details>
+  <details><summary>🔁 Un job quedó "interrupted" tras cerrar la app</summary><div class="body">
+    <p>Es la recuperación normal post-crash. En Activity verás el job en rojo con dos acciones:
+    <b>Reanudar</b> (continúa donde iba — los handlers puros son idempotentes) o <b>Reiniciar</b>
+    (vuelve a empezar desde el snapshot original que se conserva). Los jobs que estaban en cola
+    continúan solos al abrir.</p></div></details>
+  <details><summary>🐌 El preview del máster va a tirones</summary><div class="body">
+    <p>El máster se sirve por rangos (nunca se carga entero), pero si tu disco es lento el scrub puede
+    sufrir. Solución: deja que la app genere el proxy (la primera vez es automático) y verifica en el
+    Doctor que FFmpeg y el disco estén en verde. Un proyecto en carpeta de red (NAS/iCloud) es la causa
+    típica — las escrituras atómicas requieren disco local POSIX.</p></div></details>
+  <details><summary>🔌 Un provider (stock/IA) falla o tarda</summary><div class="body">
+    <p>Revisa el <b>Doctor</b> (Activity): muestra la latencia y el estado de cada provider. Tras 3
+    fallos el circuit breaker lo deshabilita 10 minutos y el sistema degrada según la prioridad
+    configurada (cliente → stock → IA → handoff manual). Con STRICT FREE MODE activo, jamás usa un
+    proveedor pagado como fallback silencioso.</p></div></details>
+  <details><summary>🔑 "API key inválida" a mitad de un lote</summary><div class="body">
+    <p>La validación de credenciales ocurre al configurar (test connection obligatorio), pero una key
+    puede vencer después. El Doctor la marca en rojo antes de que el lote llegue al paso problemático.
+    Las keys viven en el Keychain del sistema — nunca en archivos del proyecto.</p></div></details>
+  <details><summary>🅰️ El texto se sale de las safe areas en el video final</summary><div class="body">
+    <p>El QA pre-revisión lo detecta antes de renderizar (reporte en Dresser). Causa típica: captions
+    estilo del cliente sin ajustar al formato 9:16. Los Client Profiles guardan safe areas por
+    plataforma; verifica que la pieza tenga asignado el perfil correcto.</p></div></details>
+  <details><summary>🧊 El vidrio (glass) se ve mal sobre mi video</summary><div class="body">
+    <p>El glass solo existe en la capa de interfaz (nav, toolbars), nunca sobre el contenido. Si aun
+    así lo percibes ilegible, activa el modo <b>Performance</b> en Ajustes (superficies sólidas, cero
+    blur) — la UI no depende de la transparencia para funcionar. Con "reducir transparencia" del
+    sistema se activa solo.</p></div></details>
+</section>
+
+<section id="faq">
+  <span class="k">FAQ</span>
+  <h2>Preguntas frecuentes</h2>
+  <details open><summary>¿Qué necesito para correr la app?</summary><div class="body">
+    <p>macOS (Apple Silicon recomendado) · Node 22+ · FFmpeg 9 (el Doctor lo verifica). Opcional:
+    Whisper local para transcribir offline, ComfyUI para generación local, llaves de Pexels/Pixabay
+    (gratis) para el Asset Finder. Nada más para empezar.</p></div></details>
+  <details><summary>¿Es gratis? ¿Qué parte cuesta dinero?</summary><div class="body">
+    <p>La app y todo su core son gratuitos y locales. Costos posibles solo de terceros: stock premium,
+    APIs de generación IA (Kling, etc.) y TTS de pago. El STRICT FREE MODE bloquea fallbacks pagados
+    silenciosos y todo job caro pide confirmación antes de gastar. Con Edge TTS + Pexels + Whisper
+    local + handoff manual puedes producir sin pagar nada a nadie.</p></div></details>
+  <details><summary>¿Mis videos suben a la nube?</summary><div class="body">
+    <p>No. Medios y proyectos viven en tu Mac. Supabase solo sincroniza el estado de revisión del
+    companion (jobs/notas/aprobaciones) y Drive entra readonly cuando tú lo pides. El asistente de
+    este sitio tampoco envía nada — corre en tu navegador.</p></div></details>
+  <details><summary>¿Puedo aportar código o reportar bugs?</summary><div class="body">
+    <p>Sí — el repo es público: <a href="https://github.com/LordJeferies/abrxs-vav" target="_blank" rel="noopener">github.com/LordJeferies/abrxs-vav</a>.
+    Lee <code>AGENTS.md</code> y <code>docs/00_ABRSX_VAV_ADDENDUM.md</code> antes de abrir PR: las reglas
+    de diseño (graph único, frames canónicos, aislamiento de módulos) no se negocian.</p></div></details>
+  <details><summary>¿Cómo sé qué está listo y qué falta?</summary><div class="body">
+    <p>La página <a href="status.html">Estado</a> se alimenta en vivo del repositorio: roadmap con
+    checkboxes, conteo REAL/MOCK/PENDIENTE, versión actual y los últimos commits — lo que se está
+    construyendo ahora mismo. Sin páginas desactualizadas.</p></div></details>
+  <details><summary>¿Qué relación tiene con Canter, Review y los otros repos Abrxs?</summary><div class="body">
+    <p>AbrxsVAV es la casa nueva de la familia: Canter 3.8.1 y Review 05 se integran por adapters
+    (no se reescriben), la transcripción es compatible con los bridges de transcriber_v1
+    (Geometra/Cutter/VideoFlow), Delivery exporta Lienzos para Abrxs_pages, y la publicación sigue
+    en abraxas-publisher/n8n. Todo el ecosistema conserva su rol.</p></div></details>
+</section>
+</main>
+
+<footer><div class="wrap">
+  <span>AbrxsVAV · familia <b>Abraxas</b></span>
+  <span><a href="https://github.com/LordJeferies/abrxs-vav">Repo</a> · <a href="status.html">Estado</a></span>
+</div></footer>
+<script src="assets/app.js"></script>
+</body>
+</html>

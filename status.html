@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Estado del proyecto — AbrxsVAV</title>
+<meta name="description" content="Estado en vivo del desarrollo de AbrxsVAV, leído directamente del repositorio: roadmap, versiones y últimos commits.">
+<meta name="theme-color" content="#0d0f12">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+  <a class="brand" href="index.html">Abrxs<b>VAV</b></a>
+  <div class="nav-links">
+    <a href="index.html">Inicio</a><a href="tools.html">Herramientas</a>
+    <a href="workflows.html">Flujos & Tutoriales</a><a href="support.html">Soporte</a>
+    <a href="status.html">Estado</a>
+  </div>
+  <a class="gh-link" href="https://github.com/LordJeferies/abrxs-vav" target="_blank" rel="noopener">★ GitHub</a>
+</div></nav>
+
+<main class="wrap">
+<section>
+  <span class="k"><span class="live-dot"></span>&nbsp; En vivo desde el repositorio</span>
+  <h1 style="font-size:clamp(28px,4vw,42px)">Estado del proyecto</h1>
+  <p class="lead">Esta página se actualiza sola: lee el roadmap, la implementación y los commits
+  directamente de <code>github.com/LordJeferies/abrxs-vav</code>. Si el repo avanza, esto avanza —
+  sin tocar el sitio.</p>
+  <div class="err-note" id="net-error" style="display:none"></div>
+</section>
+
+<section>
+  <div class="status-grid">
+    <div class="card"><span class="k">Progreso del plan</span>
+      <div class="stat-num"><span id="steps-done">–</span>/<span id="steps-total">11</span> pasos</div>
+      <div class="bar"><i id="steps-bar" style="width:0%"></i></div>
+      <p class="sub" id="steps-note" style="margin-top:12px">Leyendo ROADMAP.txt…</p></div>
+    <div class="card"><span class="k">Implementación</span>
+      <div style="margin-top:10px;font-size:14px">
+        <span class="stat-ok stat-num" style="font-size:24px" id="real-n">–</span> REAL &nbsp;·&nbsp;
+        <span class="stat-warn stat-num" style="font-size:24px" id="mock-n">–</span> MOCK &nbsp;·&nbsp;
+        <span class="stat-bad stat-num" style="font-size:24px" id="pend-n">–</span> PENDIENTE</div>
+      <p class="sub" id="impl-note" style="margin-top:12px">Leyendo IMPLEMENTATION_STATUS.md…</p></div>
+    <div class="card"><span class="k">Versión actual</span>
+      <div class="stat-num" id="version">–</div>
+      <p class="sub" id="version-note" style="margin-top:12px">Leyendo CHANGELOG.md…</p></div>
+    <div class="card"><span class="k">Siguiente acción</span>
+      <div style="margin-top:10px;font-size:14.5px;font-weight:600" id="next-action">–</div>
+      <p class="sub">Del ROADMAP.txt del repo — lo que se está construyendo ahora.</p></div>
+  </div>
+</section>
+
+<section>
+  <span class="k">Qué se está construyendo ahora</span>
+  <h2>Últimos commits</h2>
+  <div class="card" style="margin-top:16px" id="commits"><p class="sub">Leyendo commits del repo…</p></div>
+  <p class="sub" style="margin-top:10px">Fuente: GitHub API ·
+  <a href="https://github.com/LordJeferies/abrxs-vav/commits/main" target="_blank" rel="noopener">ver historial completo</a></p>
+</section>
+
+<section>
+  <span class="k">Detalle</span>
+  <h2>Roadmap completo (texto original del repo)</h2>
+  <p class="sub">Renderizado directo de <code>ROADMAP.txt</code> — el mismo archivo que lee cualquier
+  agente de desarrollo al abrir el repositorio.</p>
+  <div class="card" style="margin-top:16px"><pre id="roadmap-raw" style="margin:0;max-height:480px;overflow:auto">Cargando ROADMAP.txt…</pre></div>
+</section>
+</main>
+
+<footer><div class="wrap">
+  <span>AbrxsVAV · familia <b>Abraxas</b></span>
+  <span><a href="https://github.com/LordJeferies/abrxs-vav">Repo</a> · <a href="support.html">Soporte</a></span>
+</div></footer>
+<script src="assets/app.js"></script>
+<script>
+(function(){
+  "use strict";
+  var RAW="https://raw.githubusercontent.com/LordJeferies/abrxs-vav/main/";
+  var API="https://api.github.com/repos/LordJeferies/abrxs-vav/";
+  function err(msg){var e=document.getElementById("net-error");e.style.display="block";e.textContent=msg;}
+  function txt(url){return fetch(url,{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error(r.status);return r.text();});}
+
+  /* ROADMAP */
+  txt(RAW+"ROADMAP.txt").then(function(t){
+    document.getElementById("roadmap-raw").textContent=t;
+    var steps=t.match(/^\s*\[([ x✅])\]\s*PASO\s*(\d+)/gim)||[];
+    var done=(t.match(/^\s*\[x\]\s*PASO/gim)||[]).length;
+    var total=Math.max(steps.length,11);
+    document.getElementById("steps-done").textContent=done;
+    document.getElementById("steps-total").textContent=total;
+    document.getElementById("steps-bar").style.width=Math.round(done/total*100)+"%";
+    var m=t.match(/SIGUIENTE ACCI[OÓ]N\n?\s*(?:←\s*)?(.+)/i);
+    if(m)document.getElementById("next-action").textContent=m[1].replace(/←.*$/,"").trim()||"Ver ROADMAP.txt";
+    else{var p2=t.match(/^\s*\[\s\]\s*PASO\s*(\d+)[^\n]*/im);if(p2)document.getElementById("next-action").textContent="Paso "+p2[1]+" del plan de construcción";}
+    var nt=document.getElementById("steps-note");
+    nt.innerHTML="Sincronizado con el repo · progreso = pasos completados del <a href='https://github.com/LordJeferies/abrxs-vav/blob/main/ROADMAP.txt' target='_blank' rel='noopener'>ROADMAP.txt</a>";
+  }).catch(function(){err("No se pudo leer el repositorio en vivo (sin conexión o rate limit de GitHub). Reintentando al recargar.");document.getElementById("roadmap-raw").textContent="(no disponible offline)";});
+
+  /* IMPLEMENTATION_STATUS */
+  txt(RAW+"docs/IMPLEMENTATION_STATUS.md").then(function(t){
+    function count(section,stop){
+      var re=new RegExp("## "+section+"[\\s\\S]*?(?=## "+stop+"|$)","i");var m=t.match(re);if(!m)return 0;
+      return (m[0].match(/^\s*[-*]\s+/gm)||[]).length;
+    }
+    document.getElementById("real-n").textContent=count("REAL","MOCK");
+    document.getElementById("mock-n").textContent=count("MOCK","PENDIENTE");
+    document.getElementById("pend-n").textContent=count("PENDIENTE","$");
+    document.getElementById("impl-note").innerHTML="Conteo de ítems en <a href='https://github.com/LordJeferies/abrxs-vav/blob/main/docs/IMPLEMENTATION_STATUS.md' target='_blank' rel='noopener'>docs/IMPLEMENTATION_STATUS.md</a> (REAL/MOCK/PENDIENTE).";
+  }).catch(function(){});
+
+  /* CHANGELOG */
+  txt(RAW+"CHANGELOG.md").then(function(t){
+    var m=t.match(/^##\s+(.+)$/m);
+    if(m){document.getElementById("version").textContent=m[1].replace(/·.*$/,"").trim();document.getElementById("version-note").textContent=m[1].trim();}
+  }).catch(function(){});
+
+  /* COMMITS */
+  fetch(API+"commits?per_page=8",{cache:"no-store"}).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(cs){
+    var box=document.getElementById("commits");box.innerHTML="";
+    cs.forEach(function(c){
+      var msg=(c.commit.message.split("\n")[0]||"");
+      var d=new Date(c.commit.author.date).toLocaleDateString("es", {day:"numeric",month:"short",year:"numeric"});
+      var row=document.createElement("div");row.className="commit";
+      var a=document.createElement("a");a.className="sha";a.href=c.html_url;a.target="_blank";a.rel="noopener";
+      a.textContent=c.sha.slice(0,7);
+      var s=document.createElement("span");s.textContent=msg;
+      var t=document.createElement("span");t.className="date";t.textContent=d;
+      row.appendChild(a);row.appendChild(s);row.appendChild(t);box.appendChild(row);
+    });
+  }).catch(function(){
+    document.getElementById("commits").innerHTML="<p class='sub'>Commits no disponibles ahora (rate limit). Ver directamente en <a href='https://github.com/LordJeferies/abrxs-vav/commits/main' target='_blank' rel='noopener'>GitHub</a>.</p>";
+  });
+})();
+</script>
+</body>
+</html>
