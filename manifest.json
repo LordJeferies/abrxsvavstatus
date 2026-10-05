@@ -1,0 +1,17 @@
+{
+  "name": "AbrxsVAV — Producción de contenido",
+  "short_name": "AbrxsVAV",
+  "description": "Sistema operativo de producción audiovisual: cortar, vestir, generar y entregar. Estado en vivo, tutoriales y asistente local.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0d0f12",
+  "theme_color": "#0d0f12",
+  "lang": "es",
+  "categories": ["productivity", "video"],
+  "icons": [
+    { "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

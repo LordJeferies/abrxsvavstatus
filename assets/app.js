@@ -8,6 +8,11 @@
     if (a.getAttribute("href") === here) a.setAttribute("aria-current", "page");
   });
 
+  /* ── PWA: service worker (shell offline; el status en vivo va siempre a red) ── */
+  if ("serviceWorker" in navigator && location.protocol === "https:") {
+    navigator.serviceWorker.register("sw.js").catch(function () { /* sin SW en dev/file */ });
+  }
+
   /* ── asistente local: búsqueda por puntuación sobre KB ── */
   function tokenize(s) {
     return (s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
