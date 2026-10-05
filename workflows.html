@@ -158,6 +158,22 @@
     las mismas reglas de seguridad: acciones destructivas exigen confirm:true y nada gasta créditos
     sin tu confirmación. Herramientas tipadas vav_* documentadas en docs/MCP_INTEGRATION.md.</p>
   </div></details>
+</section>  <details><summary>🎞️ T11 · Motion graphics por capas (estilo Remotion)</summary><div class="body" id="t-motion">
+    <b>Estación:</b> Dresser → Motion Composer. <b>Entra:</b> imágenes/textos en capas. <b>Sale:</b> RenderSpec Remotion + comandos FFmpeg.
+    <p>1. Selecciona un rango del timeline (o pídelo por MCP con <span class="mono">vav_motion_compose</span>).
+    2. Define las capas: fondo (imagen/patrón compartido — sistema visual bloqueado), medio (cutouts halftone B&W), frente (títulos/objetos con drop shadow).
+    3. Asigna motion por capa con los presets del canon (push-in, pans, slow drift — zoom ≤ 1.18, ease-in-out) y tratamientos (halftone, film treatment con grain+scan lines+vignette+gate weave, time-boil 12fps).
+    4. La app compila keyframes deterministas → RenderSpec JSON (para el bundle Remotion) + comandos FFmpeg zoompan (preview inmediato).
+    5. Regla de los tutoriales: construye escena por escena y recién entonces fusiona al master — el grafo mantiene cada composición aislada.
+    6. La voz manda: cada línea del transcript = una escena que empieza y termina con su narración (Canter word-level ya da los frames exactos).</p>
+  </div></details>
+
+  <details><summary>🧭 T12 · Terminar el video con el Coach (CapCut/DaVinci)</summary><div class="body" id="t-coach">
+    <b>Estación:</b> Delivery → Coach. <b>Sale:</b> plan de montaje paso a paso.
+    <p>1. Pide <span class="mono">vav_coach_plan</span> (o el botón en Delivery): la app compila el grafo en pasos ordenados por timecode.
+    2. Cada paso dice QUÉ hacer ("coloca el B-roll BR03 en 00:14–00:22"), CÓMO ("pista superior, zoom 1.0→1.12 ease-in-out, Ken Burns") y POR QUÉ (el propósito editorial guardado en el evento).
+    3. Sigue el plan en CapCut/DaVinci — o dárselo a un agente con el MCP de DaVinci: cada paso tiene rango, contenido y valores exactos.</p>
+  </div></details>
 </section>
 
 <section>

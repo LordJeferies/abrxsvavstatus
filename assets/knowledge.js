@@ -79,4 +79,14 @@ const KB = [
   { q: "¿Puedo usar la app con mis otros sistemas (Geometra, editorial-os, publisher)?",
     a: "Sí, por diseño: la transcripción word-level es compatible con los bridges de Abrxs_transcriber_v1 (Geometra/Cutter/VideoFlow), el Lienzo-HTML de Delivery entra directo al catálogo de Abrxs_pages, y los Client Profiles pueden intercambiar con el planner de editorial-os. La publicación sigue en abraxas-publisher o n8n — AbrxsVAV no publica en redes directamente.",
     tags: ["geometra","editorial","publisher","integracion","ecosistema"], link: "workflows.html" }
+,
+  { q: "¿Cómo hago motion graphics / animaciones con imágenes?",
+    a: "Con el Motion Composer (estilo Remotion): las imágenes y textos viven en capas (fondo → medio → frente) y el movimiento es código determinista, no IA — 10 presets del canon (push-in, pans, slow drift, zoom máx 1.18) se compilan a keyframes y se entregan como RenderSpec JSON para Remotion y como comandos FFmpeg para preview inmediato. Seleccionas un rango del editor y compones motion para esa sección; también por MCP (vav_motion_compose). Incluye tratamientos de cine: halftone, film treatment (grain, scan lines, vignette), time-boil 12fps, glass SaaS, weld&detach.",
+    tags: ["motion","remotion","animacion","capas","imagenes","motion graphics","ken burns","halftone"], link: "workflows.html#t-motion" },
+  { q: "¿Puedo usar solo una herramienta (solo subtítulos o solo cortes)?",
+    a: "Sí — cada estación es independiente y escribe sobre el mismo grafo: puedes usar solo Canter para cortar, solo captions, o el flujo completo. Y los TIPOS también son modulares: familias XR, SFX, motions, presets de captions, packs y tratamientos viven en registries versionados (/api/registries) — agregar un tipo nuevo mañana es agregar una entrada de datos, nunca código.",
+    tags: ["modular","registries","subtitulos","cortes","extensible","tipos"], link: "tools.html" },
+  { q: "¿Cómo termino mi video en CapCut o DaVinci con ayuda de la app?",
+    a: "Con el Modo Coach: la app compila el Production Graph en un plan de montaje paso a paso — por cada paso te dice QUÉ hacer, CÓMO y POR QUÉ, con timecodes exactos (ej: 'coloca BR03 en 00:14–00:22, zoom 1.0→1.12'). Lo pides en Delivery o por MCP (vav_coach_plan) y lo sigues en tu editor, o se lo das a un agente con el MCP de DaVinci.",
+    tags: ["coach","capcut","davinci","paso a paso","montaje","terminar"], link: "workflows.html#t-coach" }
 ];

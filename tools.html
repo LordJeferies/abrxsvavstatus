@@ -140,6 +140,18 @@
   y logs estructurados con visor integrado.</p>
 </div></section>
 
+<section id="motion-composer"><div class="card">
+  <span class="tag acc">MOTION COMPOSER · ESTILO REMOTION</span><h2 style="margin-top:8px">🎞️ Motion graphics deterministas por capas</h2>
+  <p class="sub">Las imágenes y textos viven en <b>capas</b> (fondo → medio → frente) y el movimiento es <b>código, no IA</b>: 10 presets de motion del canon (push-in, pans, drift… zoom máx 1.18, ease-in-out único) se compilan a keyframes deterministas. Dos salidas: <b>RenderSpec JSON</b> listo para un bundle Remotion, y <b>comandos FFmpeg zoompan</b> para preview/render inmediato.</p>
+  <p class="sub"><b>Desde el editor:</b> seleccionas un rango del timeline → "Componer motion para esta sección" → la app crea el evento motion en el grafo y encola el render. <b>Tratamientos incluidos</b> (de los 4 tutoriales de referencia): halftone B&W estilo revista, film treatment (grain + scan lines + vignette + gate weave), time-boil 12fps, humo screen-blend, glass panel SaaS (frost 12-14px, edge light 16%, face 58%), weld&amp;detach, sombra al piso, lámpara con flicker. <b>Todo por MCP:</b> vav_motion_compose / vav_motion_list / vav_motion_render.</p>
+  <p class="sub">Codificado de los 4 tutoriales Remotion de la biblioteca — <a href="https://github.com/LordJeferies/abrxs-vav/blob/main/docs/REMOTION_INTEGRATION.md">docs/REMOTION_INTEGRATION.md</a>.</p>
+</div></section>
+
+<section id="coach"><div class="card">
+  <span class="tag acc">MODO COACH</span><h2 style="margin-top:8px">🧭 El productor que te dice el paso a paso</h2>
+  <p class="sub">Al terminar tu video (en CapCut, DaVinci o por MCP), el Coach compila el Production Graph en un <b>plan de montaje paso a paso</b>: por cada paso te dice QUÉ hacer, CÓMO hacerlo y POR QUÉ, con timecodes exactos — como un coach productor dictándote el montaje. También operativo por MCP (<span class="mono">vav_coach_plan</span>).</p>
+</div></section>
+
 <section>
   <div class="card" style="display:flex;gap:24px;align-items:center;flex-wrap:wrap">
     <div style="flex:1;min-width:260px"><b>¿Cómo se combinan en la práctica?</b>
